@@ -79,7 +79,7 @@ const startServer = async () => {
 
     // Health check
     app.get("/", (req, res) => {
-      res.status(200).json({ success: true, message: "🚀 API is running smoothly!" });
+      res.status(200).json({ success: true, message: "API is running smoothly!" });
     });
 
    app.use((req, res, next) => {
