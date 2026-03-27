@@ -1,4 +1,4 @@
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
@@ -8,27 +8,21 @@ import Quiz from "../components/Quiz";
 import AiAction from "../components/AiAction";
 import Flashcard from "../components/Flashcard";
 
-
 export default function DocumentViewer() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const location = useLocation();
   const token = localStorage.getItem("token");
 
   const [doc, setDoc] = useState(location.state || null);
   const [activeTab, setActiveTab] = useState("Content");
 
-  //  Fetch document from backend if refreshed
   useEffect(() => {
-      console.log(" useEffect triggered with:", { doc, id, token });
     if (!doc && id && token) {
-    
       axios
         .get("http://localhost:8000/api/documents", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-             console.log(" Documents from API →", res.data.documents);
           const found = res.data.documents.find((d) => d._id === id);
           if (found) {
             setDoc({
@@ -37,118 +31,87 @@ export default function DocumentViewer() {
             });
           }
         })
-        .catch((err) => console.error("Error fetching document:", err));
+        .catch(() => {});
     }
   }, [doc, id, token]);
 
-  if (!doc)
+  if (!doc) {
     return (
-      <div className="flex items-center justify-center h-screen text-gray-600">
+      <div className="flex items-center justify-center min-h-screen text-gray-600">
         Loading document...
       </div>
     );
+  }
 
   return (
     <div className="flex bg-gray-50 min-h-screen">
-      {/* Sidebar */}
+
       <Sidebar />
 
-      {/* Main content area */}
-      <div className="flex-1 ml-64 flex flex-col">
-        {/* Navbar */}
+      <div className="flex-1 md:ml-64 flex flex-col">
         <Navbar />
 
-
         {/* Tabs */}
-        <div className="flex border-b bg-white px-8">
-          {["Content", "Chat", "AI Actions", "Flashcards", "Quizzes"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`pb-3 px-4 font-medium border-b-2 transition-colors ${
-                activeTab === tab
-                  ? "border-green-600 text-green-600"
-                  : "border-transparent text-gray-500 hover:text-green-500"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
+        <div className="border-b bg-white px-3 md:px-6 overflow-x-auto">
+          <div className="flex gap-4 min-w-max">
+            {["Content", "Chat", "AI Actions", "Flashcards", "Quizzes"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`pb-3 px-2 md:px-4 text-sm md:text-base font-medium border-b-2 transition ${
+                  activeTab === tab
+                    ? "border-green-600 text-green-600"
+                    : "border-transparent text-gray-500 hover:text-green-500"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Tab Content */}
-        <div className="flex-1 bg-gray-100 p-6">
+        {/* Content */}
+        <div className="flex-1 bg-gray-100 p-3 md:p-6">
+
+          {/* PDF */}
           {activeTab === "Content" && (
-            <div className="bg-white rounded-lg shadow p-4 h-[80vh]">
+            <div className="bg-white rounded-lg shadow p-3 md:p-4 h-[75vh] md:h-[80vh]">
               <iframe
                 src={doc.fileURL || `http://localhost:8000${doc.filePath}`}
                 title={doc.title}
-                className="w-full h-full border-none rounded"
-              ></iframe>
+                className="w-full h-full rounded"
+              />
             </div>
           )}
 
-  
+          {/* Chat */}
+          {activeTab === "Chat" && (
+            <div className="h-[75vh] md:h-[80vh]">
+              <ChatBox documentId={doc._id || id} token={token} />
+            </div>
+          )}
 
-{activeTab === "Chat" && (
-  <div className="p-6">
-    {doc ? (
-      <>
-        {console.log(" Chat props →", { documentId: doc._id || id, token })}
-        <ChatBox documentId={doc._id || id} token={token} />
-      </>
-    ) : (
-      <div className="text-gray-500 text-center py-10">
-         Loading document details...
-      </div>
-    )}
-  </div>
-)}
+          {/* AI Actions */}
           {activeTab === "AI Actions" && (
-                   <div className="bg-white rounded-lg shadow p-6 text-gray-700 h-[80vh]">
-        {doc?(
-          <> <AiAction documentId={doc._id||id} token={token} />
-                      </>
-        ):(
-      <div className="text-gray-500 text-center py-10">
-         Loading  Ai Action
-      </div>
-        )
-
-        }
-        
+            <div className="bg-white rounded-lg shadow h-[75vh] md:h-[80vh] overflow-hidden">
+              <AiAction documentId={doc._id || id} token={token} />
             </div>
           )}
 
+          {/* Flashcards */}
           {activeTab === "Flashcards" && (
-          <div className="bg-white rounded-lg shadow p-6 text-gray-700 h-[80vh]">
-        {doc?(
-          <> <Flashcard documentId={doc._id||id} token={token} />
-                      </>
-        ):(
-      <div className="text-gray-500 text-center py-10">
-           Loading.... FlashCard
-      </div>
-        )
-        }
-        
+            <div className="bg-white rounded-lg shadow h-[75vh] md:h-[80vh] overflow-hidden">
+              <Flashcard documentId={doc._id || id} token={token} />
             </div>
           )}
 
+          {/* Quiz */}
           {activeTab === "Quizzes" && (
-            <div className="bg-white rounded-lg shadow p-6 text-gray-700 h-[80vh]">
-        {doc?(
-          <> <Quiz documentId={doc._id||id} token={token} doc={doc}/>
-                      </>
-        ):(
-      <div className="text-gray-500 text-center py-10">
-         Loading document details...
-      </div>
-        )
-
-        }
+            <div className="bg-white rounded-lg shadow h-[75vh] md:h-[80vh] overflow-hidden">
+              <Quiz documentId={doc._id || id} token={token} doc={doc} />
             </div>
           )}
+
         </div>
       </div>
     </div>

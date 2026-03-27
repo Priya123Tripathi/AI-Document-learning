@@ -1,45 +1,66 @@
 import { FiBell, FiSearch } from "react-icons/fi";
 import { useEffect, useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Navbar() {
-    const navigate = useNavigate();
-  const [user, setUser] = useState({ name: "", email: "" });
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-  // Load user info from localStorage when Navbar mounts
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-  }, []);
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:8000/api/auth/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setUser(res.data.user || res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (token) fetchUser();
+  }, [token]);
 
   return (
-    <header className="w-full bg-white/70 backdrop-blur-md border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-10 shadow-sm">
-      
+    <header className="w-full bg-white/70 backdrop-blur-md border-b border-gray-200 px-4 md:px-6 py-3 flex items-center justify-between sticky top-0 z-10 shadow-sm">
 
 
-      {/* Right Section */}
-      <div className="flex items-center gap-6 ml-auto">
- 
-        {/* Profile Section */}
-        <div className="flex items-center gap-3 cursor-pointer">
-          <img onClick={()=>navigate("/profile")}
+      {/* Right */}
+      <div className="flex items-center gap-3 md:gap-6 ml-auto">
+
+        {/* Profile */}
+        <div
+          onClick={() => navigate("/profile")}
+          className="flex items-center gap-2 md:gap-3 cursor-pointer"
+        >
+          <img
             src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-              user.name || "User"
+              user?.name || "User"
             )}&background=6366f1&color=fff`}
             alt="User avatar"
-            className="h-9 w-9 rounded-full border border-gray-300"
+            className="h-8 w-8 md:h-9 md:w-9 rounded-full border"
           />
-          <div className="flex flex-col text-right">
+
+          {/* Hide details on small screens */}
+          <div className="hidden sm:flex flex-col text-right">
             <span className="text-sm font-semibold text-gray-800">
-              {user.name || "Loading..."}
+              {user?.name || ""}
             </span>
             <span className="text-xs text-gray-500">
-              {user.email || "example@email.com"}
+              {user?.email || ""}
             </span>
           </div>
         </div>
+
       </div>
     </header>
   );

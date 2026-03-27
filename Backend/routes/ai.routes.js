@@ -9,14 +9,14 @@ const router = express.Router();
 router.post("/ai-action", verifyToken, async (req, res) => {
   const apiKey = process.env.GEMINI_API_KEY;
   const { documentId, question,type,concept ,content} = req.body;
-console.log("USER",req.user);
+
   try {
     const doc = await Document.findById(documentId);
     if (!doc || !doc.textContent) {
       return res.status(404).json({ success: false, message: "Document text missing." });
     }
 
-    //FIXED URL: Flash model use kar rahe hain aur Stable v1 endpoint
+    
 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
     
 let prompt="";
@@ -79,15 +79,14 @@ ${doc.textContent.slice(0,20000)}
       }
     );
 
-    // Data extraction logic from your assistant code
+    // Data extraction logic 
     const answer = resp.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-      console.log(answer);
+   
     if(type === "Flashcard" && answer){
 
-      console.log("RAW AI:", answer);
 
 const cleaned = answer.replace(/```json|```/g,"");
-console.log("CLEANED:", cleaned);
+
 let cards = [];
 try{
   cards = JSON.parse(cleaned);
@@ -100,7 +99,7 @@ try{
 }
 
 let savedSet = null;
-console.log("CARDS:", cards);
+
 if(cards.length > 0){
   savedSet = await Flashcard.create({
     documentId,
