@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import { saveActivity } from "../utils/activity";
 import { updateStats } from "../utils/stats";
 import { FiTrash2 } from "react-icons/fi";
 import { MdOutlineQuiz } from "react-icons/md";
+import API from "../api";
 
 export default function Quiz({ documentId, token, doc }) {
   const navigate = useNavigate();
@@ -14,8 +15,8 @@ export default function Quiz({ documentId, token, doc }) {
 
   const fetchQuiz = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/quiz/document/${documentId}`,
+      const { data } = await API.get(
+        `/api/quiz/document/${documentId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -34,8 +35,8 @@ export default function Quiz({ documentId, token, doc }) {
     if (!window.confirm("Delete this quiz?")) return;
 
     try {
-      await axios.delete(
-        `http://localhost:8000/api/quiz/${id}`,
+      await API.delete(
+        `/api/quiz/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -53,8 +54,8 @@ export default function Quiz({ documentId, token, doc }) {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `http://localhost:8000/api/quiz/generate/${documentId}`,
+      const res = await API.post(
+        `/api/quiz/generate/${documentId}`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

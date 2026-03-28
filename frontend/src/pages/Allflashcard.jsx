@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { BsCreditCard2Back } from "react-icons/bs";
 import Navbar from "../components/Navbar";
-import API from "./api";
+import API from "../api";
 
 export default function Allflashcard() {
   const [sets, setSets] = useState([]);

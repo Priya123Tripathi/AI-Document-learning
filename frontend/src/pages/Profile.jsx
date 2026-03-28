@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import API from "./api";
+import API from "../api";
 export default function Profile() {
   const token = localStorage.getItem("token");
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
+
 import { saveActivity } from "../utils/activity";
 import { BsStars } from "react-icons/bs";
-import API from "./api";
+import API from "../api";
 
 export default function AiAction({ documentId, token }) {
   const [concept, setConcept] = useState("");
@@ -18,8 +18,8 @@ export default function AiAction({ documentId, token }) {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `${API}/api/ai/ai-action`,
+      const res = await API.post(
+        `/api/ai/ai-action`,
         { documentId, type: "summary" },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -41,8 +41,8 @@ export default function AiAction({ documentId, token }) {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        `${API}/api/ai/ai-action`,
+      const res = await API.post(
+        `/api/ai/ai-action`,
         {
           documentId,
           type: "explain",

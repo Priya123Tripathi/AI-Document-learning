@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import API from "../api";
 
 export default function FlashcardViewer() {
   const { setId } = useParams();
@@ -16,14 +17,14 @@ export default function FlashcardViewer() {
   useEffect(() => {
     const fetchSet = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:8000/api/flashcards/set/${setId}`,
+        const res = await API.get(
+          `/api/flashcards/set/${setId}`,
           {
             headers: { Authorization: `Bearer ${token}` }
           }
         );
 
-        const data = await res.json();
+        const data = res.data;
 
         if (!data?.data) return;
 

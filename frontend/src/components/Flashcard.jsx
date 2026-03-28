@@ -4,7 +4,7 @@ import { BsCreditCard2Back } from "react-icons/bs";
 import { FiTrash2 } from "react-icons/fi";
 import { saveActivity } from "../utils/activity";
 import { updateStats } from "../utils/stats";
-import API from "./api";
+import API from "../api";
 
 export default function Flashcards({ documentId, token }) {
   const [cardSets, setCardSets] = useState([]);
@@ -14,14 +14,14 @@ export default function Flashcards({ documentId, token }) {
   useEffect(() => {
     const fetchSets = async () => {
       try {
-        const res = await fetch(
-          `${API}/api/flashcards/${documentId}`,
+        const res = await API.get(
+          `/api/flashcards/${documentId}`,
           {
             headers: { Authorization: `Bearer ${token}` }
           }
         );
-        const data = await res.json();
-        setCardSets(data?.data || []);
+    
+        setCardSets(res.data?.data || []);
       } catch (err) {
         console.log(err);
       }
@@ -33,8 +33,7 @@ export default function Flashcards({ documentId, token }) {
     if (!window.confirm("Delete this flashcard set?")) return;
 
     try {
-      await fetch(`${API}/api/flashcards/${setId}`, {
-        method: "DELETE",
+      await API.delete(`/api/flashcards/${setId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -50,19 +49,20 @@ export default function Flashcards({ documentId, token }) {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API}/api/ai/ai-action`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          documentId,
-          type: "Flashcard"
-        })
-      });
+  const res = await API.post(
+  "/api/ai/ai-action",
+  {
+    documentId,
+    type: "Flashcard"
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
 
-      const data = await res.json();
+const data = res.data;
 
       if (!data?.data) {
         alert("Flashcard is not generated");

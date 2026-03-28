@@ -1,7 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { saveActivity } from "../utils/activity";
-import API from "./api";
+import API from "../api";
 
 export default function ChatBox({ documentId, token }) {
   const [messages, setMessages] = useState([]);
@@ -19,8 +18,8 @@ export default function ChatBox({ documentId, token }) {
     setLoading(true);
 
     try {
-      const res = await axios.post(
-        `${API}/api/ai/ai-action`,
+      const res = await API.post(
+        `/api/ai/ai-action`,
         { documentId, question: input, type: "chat" },
         {
           headers: {

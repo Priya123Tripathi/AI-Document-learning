@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 import { saveActivity } from "../utils/activity";
 import { updateStats } from "../utils/stats";
-import API from "./api";
+import API from "../api";
 
 
 export default function Documents() {

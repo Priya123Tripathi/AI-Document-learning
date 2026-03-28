@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { saveActivity } from "../utils/activity";
-import API from "./api";
+import API from "../api";
 
 export default function QuizViewer() {
   const navigate = useNavigate();

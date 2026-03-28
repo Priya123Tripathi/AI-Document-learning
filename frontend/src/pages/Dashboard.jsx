@@ -3,10 +3,11 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import { MdOutlineQuiz } from "react-icons/md";
 import { FiFileText, FiBookOpen } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+
+import DashboardStatsCard from "../components/DashboardStatsCard";
 
 export default function Dashboard() {
-  const navigate = useNavigate();
+ 
 
   const [stats, setStats] = useState({
     documents: 0,
@@ -67,58 +68,28 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
 
             {/* Documents */}
-            <div
-              onClick={() => navigate("/documents")}
-              className="bg-white border rounded-xl p-4 md:p-6 hover:shadow-md transition cursor-pointer"
-            >
-              <div className="flex items-center gap-3">
-                <div className="bg-blue-100 text-blue-600 p-2 rounded-lg">
-                  <FiFileText size={18} />
-                </div>
-                <span className="text-sm text-gray-600">
-                  Documents
-                </span>
-              </div>
-
-              <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mt-3">
-                {stats.documents}
-              </h3>
-            </div>
+           <DashboardStatsCard 
+           title="Documents"
+           value={stats.documents}
+           icon={<FiFileText/>}
+            color="bg-blue-100 text-blue-600"
+/>
 
             {/* Flashcards */}
-            <div
-              onClick={() => navigate("/flashcards")}
-              className="bg-white border rounded-xl p-4 md:p-6 hover:shadow-md transition cursor-pointer"
-            >
-              <div className="flex items-center gap-3">
-                <div className="bg-pink-100 text-pink-600 p-2 rounded-lg">
-                  <FiBookOpen size={18} />
-                </div>
-                <span className="text-sm text-gray-600">
-                  Flashcards
-                </span>
-              </div>
-
-              <h3 className="text-2xl md:text-3xl font-bold text-pink-600 mt-3">
-                {stats.flashcards}
-              </h3>
-            </div>
+                  <DashboardStatsCard
+                         title="Flashcards"
+                  value={stats.flashcards}
+               icon={<FiBookOpen />}
+                  color="bg-pink-100 text-pink-600"
+             />
 
             {/* Quizzes */}
-            <div className="bg-white border rounded-xl p-4 md:p-6 hover:shadow-md transition">
-              <div className="flex items-center gap-3">
-                <div className="bg-green-100 text-green-600 p-2 rounded-lg">
-                  <MdOutlineQuiz size={18} />
-                </div>
-                <span className="text-sm text-gray-600">
-                  Quizzes
-                </span>
-              </div>
-
-              <h3 className="text-2xl md:text-3xl font-bold text-green-600 mt-3">
-                {stats.quizzes}
-              </h3>
-            </div>
+                              <DashboardStatsCard
+                                title="Quizzes"
+                               value={stats.quizzes}
+                              icon={<MdOutlineQuiz />}
+                           color="bg-green-100 text-green-600"
+/>
 
           </div>
 

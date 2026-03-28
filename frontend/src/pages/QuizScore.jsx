@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import API from "./api";
+import API from "../api";
 
 export default function QuizScore() {
   const navigate = useNavigate();

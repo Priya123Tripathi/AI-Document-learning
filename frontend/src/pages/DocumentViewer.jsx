@@ -7,7 +7,7 @@ import ChatBox from "../components/ChatBox";
 import Quiz from "../components/Quiz";
 import AiAction from "../components/AiAction";
 import Flashcard from "../components/Flashcard";
-import API from "./api";
+import API from "../api";
 
 export default function DocumentViewer() {
   const { id } = useParams();

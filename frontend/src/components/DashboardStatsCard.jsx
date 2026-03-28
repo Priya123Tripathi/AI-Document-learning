@@ -1,3 +1,4 @@
+export default function DashboardStatsCard({ title, value, icon, color }) {
   return (
     <div className="bg-white shadow rounded-lg p-5 flex items-center justify-between hover:shadow-lg transition">
       <div>
@@ -10,3 +11,4 @@
       </div>
     </div>
   );
+}

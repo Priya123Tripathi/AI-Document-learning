@@ -10,6 +10,8 @@ import {
 import { BsStars } from "react-icons/bs";
 import { useState } from "react";
 
+
+
 export default function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,7 +31,6 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile Top Bar */}
       <div className="md:hidden flex items-center justify-between px-4 py-3 bg-white border-b sticky top-0 z-30">
         <h1 className="text-sm font-semibold flex items-center gap-2">
           <BsStars className="text-green-600" />
