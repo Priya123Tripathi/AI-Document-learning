@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { saveActivity } from "../utils/activity";
+import API from "./api";
 
 export default function QuizViewer() {
   const navigate = useNavigate();
@@ -16,8 +17,8 @@ export default function QuizViewer() {
   const [selected, setSelected] = useState({});
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/quiz/viewer/${id}`, {
+    API
+      .get(`/api/quiz/viewer/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setQuiz(res.data))
@@ -26,8 +27,8 @@ export default function QuizViewer() {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post(
-        `http://localhost:8000/api/quiz/submit/${id}`,
+      const res = await API.post(
+        `/api/quiz/submit/${id}`,
         { selectedAnswers: selected },
         { headers: { Authorization: `Bearer ${token}` } }
       );

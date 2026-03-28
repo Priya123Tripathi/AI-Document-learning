@@ -2,6 +2,8 @@ import { FiBell, FiSearch } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API from "./api";
+
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ export default function Navbar() {
     const fetchUser = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8000/api/auth/me",
+          `${API}/api/auth/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

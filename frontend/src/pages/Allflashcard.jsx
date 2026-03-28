@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { BsCreditCard2Back } from "react-icons/bs";
 import Navbar from "../components/Navbar";
+import API from "./api";
 
 export default function Allflashcard() {
   const [sets, setSets] = useState([]);
@@ -12,7 +13,7 @@ export default function Allflashcard() {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/flashcards", {
+        const res = await API.get(`/api/flashcards`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -6,9 +6,11 @@ import { MdOutlineQuiz } from "react-icons/md";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import { saveActivity } from "../utils/activity";
 import { updateStats } from "../utils/stats";
+import API from "./api";
+
 
 export default function Documents() {
   const navigate = useNavigate();
@@ -20,8 +22,8 @@ export default function Documents() {
 
   const fetchDocuments = async () => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:8000/api/documents",
+      const { data } = await API.get(
+        `/api/documents`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -47,8 +49,8 @@ export default function Documents() {
     formData.append("file", newDoc.file);
 
     try {
-      await axios.post(
-        "http://localhost:8000/api/documents/upload",
+      await API.post(
+        `/api/documents/upload`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -68,8 +70,8 @@ export default function Documents() {
     if (!window.confirm("Delete this document?")) return;
 
     try {
-      await axios.delete(
-        `http://localhost:8000/api/documents/${id}`,
+      await API.delete(
+        `/api/documents/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

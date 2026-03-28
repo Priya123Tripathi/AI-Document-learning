@@ -2,7 +2,8 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+
+import API from "./api";
 
 export default function QuizScore() {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ export default function QuizScore() {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/quiz/result/${resultId}`, {
+    API
+      .get(`/api/quiz/result/${resultId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setResult(res.data))

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-
+import API from "./api";
 export default function Profile() {
   const token = localStorage.getItem("token");
 
@@ -17,7 +17,7 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/auth/me", {
+      .get(`${API}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUser(res.data))
@@ -37,8 +37,8 @@ export default function Profile() {
     }
 
     try {
-      const res = await axios.put(
-        "http://localhost:8000/api/auth/change-password",
+      const res = await API.put(
+        `/api/auth/change-password`,
         {
           currentPassword: passwordData.currentPassword,
           newPassword: passwordData.newPassword,

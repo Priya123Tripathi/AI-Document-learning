@@ -1,12 +1,13 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import ChatBox from "../components/ChatBox";
 import Quiz from "../components/Quiz";
 import AiAction from "../components/AiAction";
 import Flashcard from "../components/Flashcard";
+import API from "./api";
 
 export default function DocumentViewer() {
   const { id } = useParams();
@@ -18,8 +19,8 @@ export default function DocumentViewer() {
 
   useEffect(() => {
     if (!doc && id && token) {
-      axios
-        .get("http://localhost:8000/api/documents", {
+      API
+        .get(`/api/documents`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
@@ -27,7 +28,7 @@ export default function DocumentViewer() {
           if (found) {
             setDoc({
               ...found,
-              fileURL: `http://localhost:8000${found.filePath}`,
+              fileURL: `${import.meta.env.VITE_API_URL}${found.filePath}`,
             });
           }
         })
@@ -77,7 +78,7 @@ export default function DocumentViewer() {
           {activeTab === "Content" && (
             <div className="bg-white rounded-lg shadow p-3 md:p-4 h-[75vh] md:h-[80vh]">
               <iframe
-                src={doc.fileURL || `http://localhost:8000${doc.filePath}`}
+                src={doc.fileURL || `${doc.filePath}`}
                 title={doc.title}
                 className="w-full h-full rounded"
               />
