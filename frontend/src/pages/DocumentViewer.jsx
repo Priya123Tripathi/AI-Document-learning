@@ -17,24 +17,24 @@ export default function DocumentViewer() {
   const [doc, setDoc] = useState(location.state || null);
   const [activeTab, setActiveTab] = useState("Content");
 
-  useEffect(() => {
-    if (!doc && id && token) {
-      API
-        .get(`/api/documents`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          const found = res.data.documents.find((d) => d._id === id);
-          if (found) {
-            setDoc({
-              ...found,
-              fileURL: `${import.meta.env.VITE_API_URL}${found.filePath}`,
-            });
-          }
-        })
-        .catch(() => {});
-    }
-  }, [doc, id, token]);
+useEffect(() => {
+  if (!doc && id && token) {
+    API.get(`/api/documents/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => {
+        const found = res.data.document;
+
+        setDoc({
+          ...found,
+          fileURL: `${import.meta.env.VITE_API_URL}${found.filePath}`,
+        });
+      })
+      .catch((err) => {
+        console.error("Error fetching document:", err);
+      });
+  }
+}, [id, token]);
 
   if (!doc) {
     return (
@@ -78,7 +78,10 @@ export default function DocumentViewer() {
           {activeTab === "Content" && (
             <div className="bg-white rounded-lg shadow p-3 md:p-4 h-[75vh] md:h-[80vh]">
               <iframe
-                src={doc.fileURL || `${doc.filePath}`}
+              src={
+  doc.fileURL ||
+  `${import.meta.env.VITE_API_URL}${doc.filePath}`
+}
                 title={doc.title}
                 className="w-full h-full rounded"
               />

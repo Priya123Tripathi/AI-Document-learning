@@ -19,8 +19,7 @@ export default function Allflashcard() {
           },
         });
 
-        const data = await res.json();
-        setSets(data.data || []);
+      setSets(res.data.data || []);
       } catch (err) {
         console.log(err);
       }
