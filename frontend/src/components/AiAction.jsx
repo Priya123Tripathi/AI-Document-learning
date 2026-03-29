@@ -10,8 +10,7 @@ export default function AiAction({ documentId, token }) {
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");
   const [modalTitle, setModalTitle] = useState("");
-  const [explanation, setExplanation] = useState("");
-  const [summary, setSummary] = useState("");
+
 
   const handleSummarize = async () => {
     saveActivity("Summary", "Generated a summary");
