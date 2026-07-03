@@ -33,23 +33,19 @@ const quizschema= new mongoose.Schema(
     },
     message: "Correct answer must be one of the options"
   }
-}         
+},  
 
+explanation:String,
         }
     ],    
 
-      score: {
-   type: Number,
-   default: 0
-},
+
 
  totalQuestions: {
     required: true,
    type: Number
 },
 
-isCompleted:
- { type: Boolean, default: false }
   },
   { timestamps: true }
 

@@ -1,6 +1,6 @@
 export const saveActivity=(type,message)=>{
 
- console.log("saveActivity called",type,message);
+
   const activities=JSON.parse(localStorage.getItem("recentActivity")) || [];
    
 const newActivity={

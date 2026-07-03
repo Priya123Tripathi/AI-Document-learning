@@ -5,7 +5,8 @@ import { verifyToken } from "../middleware/auth.middleware.js";
 import { changePassword } from "../controllers/profile.controller.js";
 
 const router = express.Router();
-console.log("Auth routes loaded");
+console.log("Auth routes loaded")
+;
 router.post("/signup", signup);
 router.post("/login", login);
 router.get("/me",verifyToken,me);

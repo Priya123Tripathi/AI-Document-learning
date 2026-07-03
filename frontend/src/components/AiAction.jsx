@@ -25,7 +25,7 @@ export default function AiAction({ documentId, token }) {
         }
       );
 
-      setSummary(res.data.answer);
+    
       setModalTitle("Document Summary");
       setModalText(res.data.answer);
       setShowModal(true);
@@ -39,7 +39,6 @@ export default function AiAction({ documentId, token }) {
     saveActivity("Explain", "Asked about a doubt");
     try {
       setLoading(true);
-
       const res = await API.post(
         `/api/ai/ai-action`,
         {
@@ -51,8 +50,7 @@ export default function AiAction({ documentId, token }) {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      setExplanation(res.data.answer);
+     
       setModalTitle(`Explanation of "${concept}"`);
       setModalText(res.data.answer);
       setShowModal(true);

@@ -16,7 +16,7 @@ export const me=async(req,res,next)=>{
 
 export const changePassword = async (req, res) => {
   try {
-    console.log("BODY:", req.body);
+  
    const {currentPassword , newPassword}=req.body;
 
       if (!currentPassword || !newPassword) {

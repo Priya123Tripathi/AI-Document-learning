@@ -16,8 +16,7 @@ export default function Profile() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    axios
-      .get(`${API}/api/auth/me`, {
+    API.get(`/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUser(res.data))

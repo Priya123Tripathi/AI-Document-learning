@@ -9,6 +9,8 @@ import AiAction from "../components/AiAction";
 import Flashcard from "../components/Flashcard";
 import API from "../api";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 export default function DocumentViewer() {
   const { id } = useParams();
   const location = useLocation();
@@ -19,6 +21,7 @@ export default function DocumentViewer() {
 
 useEffect(() => {
   if (!doc && id && token) {
+     
     API.get(`/api/documents/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -27,7 +30,7 @@ useEffect(() => {
 
         setDoc({
           ...found,
-          fileURL: `${import.meta.env.VITE_API_URL}${found.filePath}`,
+          fileURL: `${BASE_URL}${found.filePath}`,
         });
       })
       .catch((err) => {
@@ -80,7 +83,7 @@ useEffect(() => {
               <iframe
               src={
   doc.fileURL ||
-  `${import.meta.env.VITE_API_URL}${doc.filePath}`
+  `${BASE_URL}${doc.filePath}`
 }
                 title={doc.title}
                 className="w-full h-full rounded"

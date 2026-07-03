@@ -146,7 +146,31 @@ router.get("/", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to fetch documents." });
   }
 });
+router.get("/:id", verifyToken, async (req, res) => {
+  try {
+    const document = await Document.findOne({
+      _id: req.params.id,
+      uploadedBy: req.user.id,
+    });
 
+    if (!document) {
+      return res.status(404).json({
+        success: false,
+        message: "Document not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      document,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
 // document.routes.js
 router.delete("/:id", verifyToken, async (req, res) => {
   try {
@@ -167,4 +191,9 @@ router.delete("/:id", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 });
+
+
+
+
+
 export default router;

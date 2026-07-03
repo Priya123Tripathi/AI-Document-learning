@@ -17,8 +17,7 @@ export default function QuizViewer() {
   const [selected, setSelected] = useState({});
 
   useEffect(() => {
-    API
-      .get(`/api/quiz/viewer/${id}`, {
+    API.get(`/api/quiz/viewer/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setQuiz(res.data))

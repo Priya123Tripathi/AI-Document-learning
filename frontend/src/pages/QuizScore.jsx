@@ -13,8 +13,7 @@ export default function QuizScore() {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
-    API
-      .get(`/api/quiz/result/${resultId}`, {
+    API.get(`/api/quiz/result/${resultId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setResult(res.data))
