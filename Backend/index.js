@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-// Force dotenv to load the correct .env file BEFORE anything else
+//to load env
 dotenv.config();
 
 
@@ -34,7 +34,16 @@ const startServer = async () => {
     const app = express();
 
 
-    app.use(cors());
+    const corsOptions = {
+  origin: [
+    "https://ai-document-learning-aqxr.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000",  
+  ],
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
     app.use(express.json({ limit: "10mb" }));
     app.use(
   helmet({
@@ -42,8 +51,11 @@ const startServer = async () => {
     contentSecurityPolicy: {
       useDefaults: true,
       directives: {
-        "frame-ancestors": ["'self'", "http://localhost:5173", "http://127.0.0.1:5173"], 
-        //  allow your React dev server to embed iframes
+   "frame-ancestors": [
+  "'self'",
+  "http://localhost:5173",
+  "https://ai-document-learning-wfz5.vercel.app"
+]
       },
     },
   })
@@ -77,9 +89,9 @@ const startServer = async () => {
    
 
 
-    // Health check
+  
     app.get("/", (req, res) => {
-      res.status(200).json({ success: true, message: "API is running smoothly!" });
+      res.status(200).json({ success: true, message: "🚀 API is running smoothly!" });
     });
 
    app.use((req, res, next) => {
