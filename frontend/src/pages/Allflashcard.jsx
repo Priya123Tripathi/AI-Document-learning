@@ -35,7 +35,7 @@ export default function Allflashcard() {
       <Sidebar />
 
       {/* Main */}
-      <div className="flex-1 md:ml-64">
+      <div className="flex-1 md:ml-72">
         <Navbar />
 
         <div className="p-4 md:p-6">
@@ -68,7 +68,7 @@ export default function Allflashcard() {
                 <div className="flex items-start justify-between">
 
                   <div className="flex items-center gap-3">
-                    <div className="bg-green-100 text-green-600 w-9 h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center">
+                    <div className="bg-purple-100 text-purple-600 w-9 h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center">
                       <BsCreditCard2Back size={16} />
                     </div>
 
@@ -96,7 +96,7 @@ export default function Allflashcard() {
                 </div>
 
                 {/* CTA */}
-                <div className="mt-3 text-sm text-green-600 font-medium md:opacity-0 md:group-hover:opacity-100 transition">
+                <div className="mt-3 text-sm text-purple-600 font-medium md:opacity-0 md:group-hover:opacity-100 transition">
                   Open →
                 </div>
 

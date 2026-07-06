@@ -1,7 +1,7 @@
 
 import path from "path";
 import { fileURLToPath } from "url";
-
+import { getPineconeIndex } from "./services/pineconeClient.js";
 import dotenv from "dotenv";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +24,7 @@ import aiRoutes from "./routes/ai.routes.js";
 import helmet from "helmet";
 import quizRoutes from "./routes/quiz.routes.js";
 import flashcardRoutes from "./routes/Flashcard.routes.js";
+import { generateEmbedding } from "./services/embeddingService.js";
 
 
 const startServer = async () => {
@@ -102,8 +103,24 @@ app.use(cors(corsOptions));
 });
 
     const PORT = process.env.PORT || 8000;
-    app.listen(PORT, () => {
+    app.listen(PORT,async() => {
       console.log(` Server running on port ${PORT}`);
+   
+    
+        try {
+    const index = getPineconeIndex();
+    const stats = await index.describeIndexStats();
+    console.log("Pinecone connected! Stats:", stats);
+  
+    const testVector = await generateEmbedding("What is machine learning?");
+    console.log("Embedding length:", testVector.length);
+    console.log("Sample values:", testVector.slice(0, 5));
+  
+  } catch (err) {
+    console.error("Pinecone connection failed:", err.message);
+  }
+
+   
     });
   } catch (error) {
     console.error(" Failed to start server:", error.message);

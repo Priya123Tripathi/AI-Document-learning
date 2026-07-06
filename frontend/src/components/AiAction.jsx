@@ -65,7 +65,7 @@ export default function AiAction({ documentId, token }) {
 
       {/* Heading */}
       <h2 className="text-lg md:text-xl font-semibold mb-4 flex items-center gap-2">
-        <span className="bg-green-600 p-2 rounded flex items-center justify-center">
+        <span className="bg-violet-600 p-2 rounded flex items-center justify-center">
           <BsStars className="text-white text-lg" />
         </span>
         AI Actions
@@ -77,7 +77,7 @@ export default function AiAction({ documentId, token }) {
 
         <button
           onClick={handleSummarize}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full md:w-auto transition-all duration-200"
+          className="bg-violet-600 text-white px-4 py-2 rounded hover:bg-violet-700 w-full md:w-auto transition-all duration-200"
         >
           Summarize
         </button>
@@ -99,12 +99,12 @@ export default function AiAction({ documentId, token }) {
             value={concept}
             onChange={(e) => setConcept(e.target.value)}
             placeholder="Enter concept"
-            className="border p-2 flex-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="border p-2 flex-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-violet-500"
           />
 
           <button
             onClick={handleExplain}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full md:w-auto transition-all duration-200"
+            className="bg-violet-600 text-white px-4 py-2 rounded hover:bg-violet-700 w-full md:w-auto transition-all duration-200"
           >
             Explain
           </button>

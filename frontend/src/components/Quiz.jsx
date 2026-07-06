@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { saveActivity } from "../utils/activity";
-import { updateStats } from "../utils/stats";
+
 import { FiTrash2 } from "react-icons/fi";
 import { MdOutlineQuiz } from "react-icons/md";
 import API from "../api";
@@ -43,7 +43,7 @@ export default function Quiz({ documentId, token, doc }) {
       );
 
       await fetchQuiz();
-      updateStats("quiz", "remove");
+     
       saveActivity("Quiz", "Deleted a Quiz");
     } catch (err) {
       console.log(err);
@@ -64,7 +64,7 @@ export default function Quiz({ documentId, token, doc }) {
 
       if (res.status === 200 || res.status === 201) {
         await fetchQuiz();
-        updateStats("quiz", "add");
+      
         saveActivity("Quiz", "Created a new Quiz");
       }
     } catch (err) {
@@ -87,7 +87,7 @@ export default function Quiz({ documentId, token, doc }) {
         <button
           onClick={generateQuiz}
           disabled={loading}
-          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow w-full md:w-auto transition"
+          className="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg shadow w-full md:w-auto transition disabled:opacity-50"
         >
           {loading ? "Generating..." : "+ Generate Quiz"}
         </button>
@@ -107,7 +107,7 @@ export default function Quiz({ documentId, token, doc }) {
         {quizzes.map((quiz, index) => (
           <div
             key={quiz._id}
-            className="group bg-white border border-gray-200 rounded-xl p-4 md:p-5 hover:shadow-md hover:border-green-400 transition-all flex flex-col justify-between"
+            className="group bg-white border border-gray-200 rounded-xl p-4 md:p-5 hover:shadow-md hover:border-violet-400 transition-all flex flex-col justify-between"
           >
 
             {/* Top */}
@@ -115,7 +115,7 @@ export default function Quiz({ documentId, token, doc }) {
 
               <div className="flex items-center gap-3">
 
-                <div className="bg-green-100 text-green-600 w-9 h-9 rounded-md flex items-center justify-center">
+                <div className="bg-violet-100 text-violet-600 w-9 h-9 rounded-md flex items-center justify-center">
                   <MdOutlineQuiz size={16} />
                 </div>
 
@@ -149,7 +149,7 @@ export default function Quiz({ documentId, token, doc }) {
                 {quiz?.questions?.length || 0} Questions
               </span>
 
-              <span className="text-xs bg-green-50 text-green-600 px-2 py-1 rounded">
+              <span className="text-xs bg-violet-50 text-violet-600 px-2 py-1 rounded">
                 Quiz
               </span>
             </div>
@@ -157,7 +157,7 @@ export default function Quiz({ documentId, token, doc }) {
             {/* Action */}
             <button
               onClick={() => navigate(`/quizViewer/${quiz._id}`)}
-              className="mt-4 text-sm font-medium text-green-600 hover:text-green-700 transition"
+              className="mt-4 text-sm font-medium text-violet-600 hover:text-violet-700 transition"
             >
               Solve Quiz →
             </button>

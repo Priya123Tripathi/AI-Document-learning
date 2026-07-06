@@ -14,6 +14,7 @@ export default function Profile() {
   });
 
   const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     API.get(`/api/auth/me`, {
@@ -32,6 +33,7 @@ export default function Profile() {
 
   const handlePasswordSubmit = async () => {
     if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setIsError(true);
       return setMessage("Passwords do not match");
     }
 
@@ -47,6 +49,7 @@ export default function Profile() {
         }
       );
 
+      setIsError(false);
       setMessage(res.data.message);
 
       setPasswordData({
@@ -55,6 +58,7 @@ export default function Profile() {
         confirmPassword: "",
       });
     } catch (err) {
+      setIsError(true);
       setMessage(err.response?.data?.message || "Something went wrong");
     }
   };
@@ -72,7 +76,7 @@ export default function Profile() {
 
       <Sidebar />
 
-      <div className="flex-1 md:ml-64">
+      <div className="flex-1 md:ml-72">
         <Navbar />
 
         <div className="p-4 md:p-6 max-w-2xl mx-auto">
@@ -117,7 +121,7 @@ export default function Profile() {
                 placeholder="Current Password"
                 value={passwordData.currentPassword}
                 onChange={handlePasswordChange}
-                className="w-full border px-3 py-2 rounded text-sm md:text-base"
+                className="w-full border px-3 py-2 rounded text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
 
               <input
@@ -126,7 +130,7 @@ export default function Profile() {
                 placeholder="New Password"
                 value={passwordData.newPassword}
                 onChange={handlePasswordChange}
-                className="w-full border px-3 py-2 rounded text-sm md:text-base"
+                className="w-full border px-3 py-2 rounded text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
 
               <input
@@ -135,18 +139,18 @@ export default function Profile() {
                 placeholder="Confirm New Password"
                 value={passwordData.confirmPassword}
                 onChange={handlePasswordChange}
-                className="w-full border px-3 py-2 rounded text-sm md:text-base"
+                className="w-full border px-3 py-2 rounded text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
 
               <button
                 onClick={handlePasswordSubmit}
-                className="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg"
+                className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg transition"
               >
                 Change Password
               </button>
 
               {message && (
-                <p className="text-sm text-green-600">
+                <p className={`text-sm ${isError ? "text-red-600" : "text-green-600"}`}>
                   {message}
                 </p>
               )}

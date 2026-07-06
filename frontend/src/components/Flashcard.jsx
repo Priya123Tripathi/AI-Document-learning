@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { BsCreditCard2Back } from "react-icons/bs";
 import { FiTrash2 } from "react-icons/fi";
 import { saveActivity } from "../utils/activity";
-import { updateStats } from "../utils/stats";
 import API from "../api";
 
 export default function Flashcards({ documentId, token }) {
@@ -38,7 +37,7 @@ export default function Flashcards({ documentId, token }) {
       });
 
       setCardSets(prev => prev.filter(set => set._id !== setId));
-      updateStats("flashcard", "remove");
+        saveActivity("Flashcard", "deleted a flashcard");  
     } catch (err) {
       console.log(err);
     }
@@ -70,7 +69,7 @@ const data = res.data;
       }
 
       setCardSets(prev => [...prev, data.data]);
-      updateStats("flashcard", "add");
+          saveActivity("Flashcard", "Generated a flashcard");
     } catch (e) {
       alert("AI error");
     } finally {
@@ -90,7 +89,8 @@ const data = res.data;
 
           <button
             onClick={generateFlashcards}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg w-full md:w-auto transition-all duration-200"
+            className="bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg w-full md:w-auto transition-all duration-200 disabled:opacity-50"
+            disabled={loading}
           >
             {loading ? "Generating..." : "Generate Flashcards"}
           </button>
@@ -108,9 +108,10 @@ const data = res.data;
 
             <button
               onClick={generateFlashcards}
-              className="bg-green-600 text-white px-4 py-2 rounded w-full md:w-auto transition-all duration-200"
+              disabled={loading}
+              className="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded w-full md:w-auto transition-all duration-200 disabled:opacity-50"
             >
-              Generate New Set
+              {loading ? "Generating..." : "Generate New Set"}
             </button>
           </div>
 
@@ -130,7 +131,7 @@ const data = res.data;
                 <div className="flex items-start justify-between">
 
                   <div className="flex items-center gap-3">
-                    <div className="bg-green-100 text-green-600 w-9 h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center">
+                    <div className="bg-violet-100 text-violet-600 w-9 h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center">
                       <BsCreditCard2Back size={16} />
                     </div>
 
@@ -169,7 +170,7 @@ const data = res.data;
                 </div>
 
                 {/* Hover text */}
-                <div className="mt-3 text-sm text-green-600 font-medium md:opacity-0 md:group-hover:opacity-100 transition">
+                <div className="mt-3 text-sm text-violet-600 font-medium md:opacity-0 md:group-hover:opacity-100 transition">
                   Open →
                 </div>
 

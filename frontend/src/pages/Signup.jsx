@@ -31,7 +31,7 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-indigo-600 via-violet-500 to-purple-500">
 
       <div className="w-full max-w-md">
 
@@ -55,9 +55,9 @@ function Signup() {
                 value={form.name}
                 onChange={handleChange}
                 required
-                className="peer w-full px-4 pt-5 pb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="peer w-full px-4 pt-5 pb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
-              <label className="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-green-600">
+              <label className="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-violet-600">
                 Full Name
               </label>
             </div>
@@ -70,9 +70,9 @@ function Signup() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                className="peer w-full px-4 pt-5 pb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="peer w-full px-4 pt-5 pb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
-              <label className="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-green-600">
+              <label className="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-violet-600">
                 Email
               </label>
             </div>
@@ -86,16 +86,16 @@ function Signup() {
                 value={form.password}
                 onChange={handleChange}
                 required
-                className="peer w-full px-4 pt-5 pb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="peer w-full px-4 pt-5 pb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
               />
-              <label className="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-green-600">
+              <label className="absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-violet-600">
                 Password
               </label>
             </div>
 
             <button
               disabled={loading}
-              className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 transition shadow-md hover:shadow-lg disabled:opacity-60"
+              className="w-full bg-gradient-to-r from-indigo-600 to-violet-500 text-white py-2.5 rounded-lg font-medium hover:from-indigo-700 hover:to-violet-600 transition shadow-md hover:shadow-lg disabled:opacity-60"
             >
               {loading ? "Creating..." : "Sign Up"}
             </button>
@@ -106,7 +106,7 @@ function Signup() {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-green-600 font-medium hover:underline"
+              className="text-violet-600 font-medium hover:underline"
             >
               Login
             </Link>

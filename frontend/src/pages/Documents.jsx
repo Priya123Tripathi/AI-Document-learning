@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
 import { saveActivity } from "../utils/activity";
-import { updateStats } from "../utils/stats";
+
 import API from "../api";
 
 
@@ -57,7 +57,7 @@ export default function Documents() {
 
       await fetchDocuments();
       saveActivity("Document", "Uploaded a document");
-      updateStats("document", "add");
+    
 
       setIsModalOpen(false);
       setNewDoc({ title: "", file: null });
@@ -86,7 +86,7 @@ export default function Documents() {
 
       <Sidebar />
 
-      <div className="flex-1 md:ml-64">
+      <div className="flex-1 md:ml-72">
         <Navbar />
 
         <div className="p-4 md:p-6">
@@ -99,7 +99,7 @@ export default function Documents() {
 
             <button
               onClick={() => setIsModalOpen(true)}
-              className="flex items-center justify-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg w-full md:w-auto"
+              className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg w-full md:w-auto hover:bg-blue-700 transition"
             >
               <FiUpload /> Upload
             </button>
@@ -128,7 +128,7 @@ export default function Documents() {
                 <div className="flex justify-between items-start">
 
                   <div className="flex gap-3">
-                    <div className="bg-green-100 text-green-600 p-2 rounded-lg">
+                    <div className="bg-blue-100 text-blue-600 p-2 rounded-lg">
                       <HiOutlineDocumentText size={18} />
                     </div>
 
@@ -157,13 +157,13 @@ export default function Documents() {
                 {/* Stats */}
                 <div className="mt-4 flex justify-between">
 
-                  <div className="flex items-center gap-2 bg-green-50 px-2 py-1 rounded text-xs">
-                    <FiBookOpen className="text-green-600" />
+                  <div className="flex items-center gap-2 bg-purple-50 px-2 py-1 rounded text-xs">
+                    <FiBookOpen className="text-purple-600" />
                     {doc.flashcardCount || 0}
                   </div>
 
-                  <div className="flex items-center gap-2 bg-blue-50 px-2 py-1 rounded text-xs">
-                    <MdOutlineQuiz className="text-blue-600" />
+                  <div className="flex items-center gap-2 bg-orange-50 px-2 py-1 rounded text-xs">
+                    <MdOutlineQuiz className="text-orange-600" />
                     {doc.quizCount || 0}
                   </div>
 
@@ -216,7 +216,7 @@ export default function Documents() {
 
               <button
                 onClick={handleUpload}
-                className="bg-green-600 text-white px-4 py-2 rounded"
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
               >
                 Upload
               </button>

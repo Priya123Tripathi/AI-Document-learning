@@ -54,7 +54,7 @@ export default function QuizViewer() {
 
       <Sidebar />
 
-      <div className="flex-1 md:ml-64">
+      <div className="flex-1 md:ml-72">
         <Navbar />
 
         <div className="p-4 md:p-6 max-w-3xl mx-auto">
@@ -79,7 +79,7 @@ export default function QuizViewer() {
                   className={`flex items-center gap-3 border rounded-lg p-3 cursor-pointer transition
                     ${
                       selected[current] === opt
-                        ? "border-green-500 bg-green-50"
+                        ? "border-orange-500 bg-orange-50"
                         : "bg-gray-50 hover:bg-gray-100"
                     }`}
                 >
@@ -91,6 +91,7 @@ export default function QuizViewer() {
                     onChange={() =>
                       setSelected({ ...selected, [current]: opt })
                     }
+                    className="accent-orange-600"
                   />
                   <span className="text-sm md:text-base">{opt}</span>
                 </label>
@@ -103,7 +104,7 @@ export default function QuizViewer() {
               {current > 0 && (
                 <button
                   onClick={() => setCurrent(current - 1)}
-                  className="w-full md:w-auto px-4 py-2 bg-gray-200 rounded-lg"
+                  className="w-full md:w-auto px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
                 >
                   Previous
                 </button>
@@ -112,14 +113,14 @@ export default function QuizViewer() {
               {current < quiz.questions.length - 1 ? (
                 <button
                   onClick={() => setCurrent(current + 1)}
-                  className="w-full md:w-auto px-4 py-2 bg-green-600 text-white rounded-lg"
+                  className="w-full md:w-auto px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
                 >
                   Next
                 </button>
               ) : (
                 <button
                   onClick={handleSubmit}
-                  className="w-full md:w-auto px-4 py-2 bg-green-600 text-white rounded-lg"
+                  className="w-full md:w-auto px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
                 >
                   Submit
                 </button>

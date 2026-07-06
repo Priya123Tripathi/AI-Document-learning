@@ -64,7 +64,7 @@ export default function ChatBox({ documentId, token }) {
             key={i}
             className={`p-3 rounded-xl max-w-[85%] text-sm md:text-base ${
               msg.sender === "user"
-                ? "bg-green-100 ml-auto text-right"
+                ? "bg-violet-100 ml-auto text-right"
                 : "bg-gray-100 text-left"
             }`}
           >
@@ -88,13 +88,13 @@ export default function ChatBox({ documentId, token }) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask something about this document..."
-          className="flex-1 border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-green-500 w-full"
+          className="flex-1 border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-violet-500 w-full"
         />
 
         <button
           onClick={handleSend}
           disabled={!input.trim() || loading}
-          className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 w-full md:w-auto transition-all duration-200"
+          className="bg-violet-600 text-white px-4 py-2 rounded-lg hover:bg-violet-700 w-full md:w-auto transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "..." : "Send"}
         </button>

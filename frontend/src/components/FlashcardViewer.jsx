@@ -70,7 +70,7 @@ export default function FlashcardViewer() {
         <Sidebar />
       </div>
 
-      <div className="flex-1 md:ml-64">
+      <div className="flex-1 md:ml-72">
         <Navbar />
 
         <div className="p-4 md:p-6">
@@ -109,7 +109,7 @@ export default function FlashcardViewer() {
                 </div>
 
                 {/* Answer */}
-                <div className="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center text-base md:text-xl border rounded-xl shadow-md px-4 md:px-10 text-center text-white bg-green-600">
+                <div className="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center text-base md:text-xl border rounded-xl shadow-md px-4 md:px-10 text-center text-white bg-purple-600">
                   {cards[index]?.answer}
                 </div>
 
@@ -123,7 +123,7 @@ export default function FlashcardViewer() {
             <button
               onClick={prev}
               disabled={index === 0}
-              className="px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 w-full md:w-auto"
+              className="px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Previous
             </button>
@@ -135,7 +135,7 @@ export default function FlashcardViewer() {
             <button
               onClick={next}
               disabled={index === cards.length - 1}
-              className="px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 w-full md:w-auto"
+              className="px-4 py-2 bg-gray-100 rounded hover:bg-gray-200 w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
             </button>

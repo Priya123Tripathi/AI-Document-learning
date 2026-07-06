@@ -52,7 +52,7 @@ useEffect(() => {
 
       <Sidebar />
 
-      <div className="flex-1 md:ml-64 flex flex-col">
+      <div className="flex-1 md:ml-72 flex flex-col">
         <Navbar />
 
         {/* Tabs */}
@@ -64,8 +64,8 @@ useEffect(() => {
                 onClick={() => setActiveTab(tab)}
                 className={`pb-3 px-2 md:px-4 text-sm md:text-base font-medium border-b-2 transition ${
                   activeTab === tab
-                    ? "border-green-600 text-green-600"
-                    : "border-transparent text-gray-500 hover:text-green-500"
+                    ? "border-blue-600 text-blue-600"
+                    : "border-transparent text-gray-500 hover:text-blue-500"
                 }`}
               >
                 {tab}
