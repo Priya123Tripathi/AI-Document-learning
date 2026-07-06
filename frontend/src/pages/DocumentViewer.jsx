@@ -17,7 +17,7 @@ export default function DocumentViewer() {
   const token = localStorage.getItem("token");
 
   const [doc, setDoc] = useState(location.state || null);
-  const [activeTab, setActiveTab] = useState("Content");
+const [activeTab, setActiveTab] = useState("Content");
 
 useEffect(() => {
   if (!doc && id && token) {
