@@ -35,14 +35,16 @@ const startServer = async () => {
     const app = express();
 
 
-    const corsOptions = {
+  const corsOptions = {
   origin: [
     "https://ai-document-learning-aqxr.vercel.app",
+    "https://ai-document-learning-wfz5.vercel.app",  
     "http://localhost:5173",
     "http://localhost:3000",  
   ],
   credentials: true,
 };
+
 app.use(cors(corsOptions));
 
     app.use(express.json({ limit: "10mb" }));
@@ -64,7 +66,6 @@ app.use(cors(corsOptions));
 
     // Serve static uploads
     app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-     
 
     // Rate limiter
     const limiter = rateLimit({
@@ -77,12 +78,10 @@ app.use(cors(corsOptions));
     });
 
     app.use("/api/", limiter);
-     // Routes
     app.use("/api/auth", authRoutes);
     app.use("/api/ai", aiRoutes);
     app.use("/api/quiz", quizRoutes);
     app.use("/api/documents", documentRoutes);
-
     app.use("/api/flashcards", flashcardRoutes);
 
  
