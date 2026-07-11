@@ -35,6 +35,7 @@ const startServer = async () => {
         "http://localhost:3000",
       ],
       credentials: true,
+      maxAge: 86400,
     };
 
     app.use(cors(corsOptions));
